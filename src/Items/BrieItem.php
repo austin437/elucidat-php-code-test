@@ -8,13 +8,15 @@ class BrieItem extends BaseItem {
         
         if( $this->sellIn < 1)
         {
-            $this->quality = min([$this->quality + $this->baseQualityChangeValue * 2, $this->maxQuality]);
+            $this->quality = $this->quality + $this->baseQualityChangeValue * 2;
         }
         else
         {
-            $this->quality = min([$this->quality + $this->baseQualityChangeValue, $this->maxQuality]);
+            $this->quality = $this->quality + $this->baseQualityChangeValue;
         }    
-        
+
+        $this->checkQualityIsWithinBounds();
+
     }
 
 }

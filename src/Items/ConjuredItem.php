@@ -10,11 +10,13 @@ class ConjuredItem extends BaseItem {
 
         if( $this->sellIn > 1)
         {
-            $this->quality = max([$this->quality - $this->baseQualityChangeValue, $this->minQuality]);
+            $this->quality = $this->quality - $this->baseQualityChangeValue;
         }
         else
         {
-            $this->quality = max([$this->quality - $this->baseQualityChangeValue * 2, $this->minQuality]);
+            $this->quality = $this->quality - $this->baseQualityChangeValue * 2;
         }
+
+        $this->checkQualityIsWithinBounds();
     }
 }

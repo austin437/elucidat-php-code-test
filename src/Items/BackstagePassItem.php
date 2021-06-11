@@ -8,20 +8,22 @@ class BackstagePassItem extends BaseItem {
 
         if( $this->sellIn > 10)
         {
-           $this->quality = min([$this->quality + $this->baseQualityChangeValue, $this->maxQuality]);
+           $this->quality = $this->quality + $this->baseQualityChangeValue;
         }
         elseif( $this->sellIn > 5)
         {
-            $this->quality = min([$this->quality + $this->baseQualityChangeValue * 2, $this->maxQuality]);
+            $this->quality = $this->quality + $this->baseQualityChangeValue * 2;
         }    
         elseif( $this->sellIn > 0)
         {
-            $this->quality = min([$this->quality + $this->baseQualityChangeValue * 3, $this->maxQuality]);
+            $this->quality = $this->quality + $this->baseQualityChangeValue * 3;
         }    
         else 
         {
             $this->quality = $this->minQuality;
         }
+
+        $this->checkQualityIsWithinBounds();
     }
 
 }

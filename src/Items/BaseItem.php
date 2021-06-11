@@ -16,9 +16,8 @@ abstract class BaseItem extends Item {
     public function __construct($name, $quality, $sellIn)
     {
         $this->name = $name;
-        if( $quality > $this->maxQuality ) $quality = $this->maxQuality;
-        if( $quality < $this->minQuality ) $quality = $this->minQuality;
         $this->quality = $quality;
+        $this->checkQualityIsWithinBounds();
         $this->sellIn = $sellIn;
     }
 
@@ -32,12 +31,19 @@ abstract class BaseItem extends Item {
 
         if( $this->sellIn > 1)
         {
-            $this->quality = max([$this->quality - $this->baseQualityChangeValue, 0]);
+            $this->quality = $this->quality - $this->baseQualityChangeValue;
         }
         else
         {
-            $this->quality = max([$this->quality - $this->baseQualityChangeValue * 2, 0]);
+            $this->quality = $this->quality - $this->baseQualityChangeValue * 2;
         }
+
+        $this->checkQualityIsWithinBounds();
+    }
+
+    protected function checkQualityIsWithinBounds(){
+        if( $this->quality > $this->maxQuality ) $this->quality = $this->maxQuality;
+        if( $this->quality < $this->minQuality ) $this->quality = $this->minQuality;
     }
 
     protected function updateSellin(){

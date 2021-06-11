@@ -4,9 +4,12 @@ namespace App\Items;
 
 class SulfurasItem extends BaseItem {
 
+    protected $maxQuality = 80;
+    protected $minQuality = 80;
+
     public function nextDay()
     {
-        //empty method as $this->sellIn or $this->quality do not change  
+        $this->checkQualityIsWithinBounds();
     }
 
 }
