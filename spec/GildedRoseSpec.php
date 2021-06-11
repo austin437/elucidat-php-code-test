@@ -35,6 +35,16 @@ describe('Gilded Rose', function () {
                 expect($gr->getItem(0)->quality)->toBe(0);
                 expect($gr->getItem(0)->sellIn)->toBe(4);
             });
+            it('does not all a Normal Item to be created with a quality of less than 0', function () {
+                $gr = new GildedRose([new NormalItem('normal', -1, 5)]);
+                expect($gr->getItem(0)->quality)->toBe(0);
+                expect($gr->getItem(0)->sellIn)->toBe(5);
+            });
+            it('does not all a Normal Item to be created with a quality of more than 50', function () {
+                $gr = new GildedRose([new NormalItem('normal', 51, 5)]);
+                expect($gr->getItem(0)->quality)->toBe(50);
+                expect($gr->getItem(0)->sellIn)->toBe(5);
+            });
         });
         context('Brie Items', function () {
             it('updates Brie items before the sell date', function () {
@@ -79,8 +89,17 @@ describe('Gilded Rose', function () {
                 expect($gr->getItem(0)->quality)->toBe(50);
                 expect($gr->getItem(0)->sellIn)->toBe(-11);
             });
-        });
-        
+            it('does not all a BrieItem to be created with a quality of less than 0', function () {
+                $gr = new GildedRose([new BrieItem('Aged Brie', -1, 5)]);
+                expect($gr->getItem(0)->quality)->toBe(0);
+                expect($gr->getItem(0)->sellIn)->toBe(5);
+            });
+            it('does not all a BrieItem to be created with a quality of more than 50', function () {
+                $gr = new GildedRose([new BrieItem('Aged Brie', 51, 5)]);
+                expect($gr->getItem(0)->quality)->toBe(50);
+                expect($gr->getItem(0)->sellIn)->toBe(5);
+            });
+        });        
         context('Sulfuras Items', function () {
             it('updates Sulfuras items before the sell date', function () {
                 $gr = new GildedRose([new SulfurasItem('Sulfuras, Hand of Ragnaros', 10, 5)]);
@@ -156,6 +175,16 @@ describe('Gilded Rose', function () {
                 expect($gr->getItem(0)->quality)->toBe(0);
                 expect($gr->getItem(0)->sellIn)->toBe(-2);
             });
+            it('does not all a BackstagePassItem to be created with a quality of less than 0', function () {
+                $gr = new GildedRose([new BackstagePassItem('Backstage passes to a TAFKAL80ETC concert', -1, 5)]);
+                expect($gr->getItem(0)->quality)->toBe(0);
+                expect($gr->getItem(0)->sellIn)->toBe(5);
+            });
+            it('does not all a BackstagePassItem to be created with a quality of more than 50', function () {
+                $gr = new GildedRose([new BackstagePassItem('Backstage passes to a TAFKAL80ETC concert', 51, 5)]);
+                expect($gr->getItem(0)->quality)->toBe(50);
+                expect($gr->getItem(0)->sellIn)->toBe(5);
+            });
         });
         context("Conjured Items", function () {
             it('updates Conjured items before the sell date', function () {
@@ -193,6 +222,16 @@ describe('Gilded Rose', function () {
                 $gr->nextDay();
                 expect($gr->getItem(0)->quality)->toBe(0);
                 expect($gr->getItem(0)->sellIn)->toBe(-11);
+            });
+            it('does not all a ConjuredItem to be created with a quality of less than 0', function () {
+                $gr = new GildedRose([new ConjuredItem('Conjured Mana Cake', -1, 5)]);
+                expect($gr->getItem(0)->quality)->toBe(0);
+                expect($gr->getItem(0)->sellIn)->toBe(5);
+            });
+            it('does not all a ConjuredItem to be created with a quality of more than 50', function () {
+                $gr = new GildedRose([new ConjuredItem('Conjured Mana Cake', 51, 5)]);
+                expect($gr->getItem(0)->quality)->toBe(50);
+                expect($gr->getItem(0)->sellIn)->toBe(5);
             });
         });
     });

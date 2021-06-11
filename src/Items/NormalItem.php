@@ -10,6 +10,13 @@ class NormalItem extends Item {
     public $sellIn;
     public $quality;
 
+    public function __construct($name, $quality, $sellIn)
+    {
+        $this->name = $name;
+        $this->quality = min([max([$quality, 0]), 50]);
+        $this->sellIn = $sellIn;
+    }
+
     public function nextDay()
     {
         $this->updateQuality();
