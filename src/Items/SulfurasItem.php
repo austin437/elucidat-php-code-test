@@ -2,13 +2,7 @@
 
 namespace App\Items;
 
-use App\Items\NormalItem;
-
-class SulfurasItem extends NormalItem {
-
-    public $name;
-    public $sellIn;
-    public $quality;
+class SulfurasItem extends BaseItem {
 
     public function nextDay()
     {

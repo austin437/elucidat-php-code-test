@@ -2,31 +2,25 @@
 
 namespace App\Items;
 
-use App\Items\NormalItem;
-
-class BackstagePassItem extends NormalItem {
-
-    public $name;
-    public $sellIn;
-    public $quality;
+class BackstagePassItem extends BaseItem {
 
     protected function updateQuality(){
 
         if( $this->sellIn > 10)
         {
-           $this->quality = min([$this->quality + 1, 50]);
+           $this->quality = min([$this->quality + $this->baseQualityChangeValue, $this->maxQuality]);
         }
         elseif( $this->sellIn > 5)
         {
-            $this->quality = min([$this->quality + 2, 50]);
+            $this->quality = min([$this->quality + $this->baseQualityChangeValue * 2, $this->maxQuality]);
         }    
         elseif( $this->sellIn > 0)
         {
-            $this->quality = min([$this->quality + 3, 50]);
+            $this->quality = min([$this->quality + $this->baseQualityChangeValue * 3, $this->maxQuality]);
         }    
         else 
         {
-            $this->quality = 0;
+            $this->quality = $this->minQuality;
         }
     }
 

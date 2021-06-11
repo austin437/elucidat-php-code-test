@@ -2,23 +2,19 @@
 
 namespace App\Items;
 
-use App\Items\NormalItem;
+class ConjuredItem extends BaseItem {
 
-class ConjuredItem extends NormalItem {
-
-    public $name;
-    public $sellIn;
-    public $quality;
+    protected $baseQualityChangeValue = 2;
 
     protected function updateQuality(){
 
         if( $this->sellIn > 1)
         {
-            $this->quality = max([$this->quality - 2, 0]);
+            $this->quality = max([$this->quality - $this->baseQualityChangeValue, $this->minQuality]);
         }
         else
         {
-            $this->quality = max([$this->quality - 4, 0]);
+            $this->quality = max([$this->quality - $this->baseQualityChangeValue * 2, $this->minQuality]);
         }
     }
 }
